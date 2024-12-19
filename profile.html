@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Profile Card</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+      
+        body {
+            background: linear-gradient(120deg, #fdfdfd, #262a30,#00ddff8c);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile-card {
+            background: #fff;
+            color: #333;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transform: translateY(-50px);
+            animation: dropIn 1s ease-out forwards;
+        }
+
+        @keyframes dropIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-body {
+            padding: 2rem;
+            position: relative;
+        }
+
+        
+        .profile-card img {
+            border: 5px solid rgba(0, 0, 0, 0.429);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        
+        h3 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        
+        h5 {
+            color: #2575fc;
+            font-weight: bold;
+        }
+
+       
+        .btn {
+            border-radius: 30px;
+            padding: 0.5rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        
+        #skills-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        #skills-list li:hover {
+            transform: translateX(10px);
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .badge {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .delete-btn {
+            cursor: pointer;
+            color: #dc3545;
+            transition: transform 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            transform: scale(1.2);
+        }
+
+        /* Resume Upload */
+        .resume-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 0.5rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+       
+        .editable[contenteditable="true"] {
+            background: #eaf4ff;
+            border-bottom: 2px dashed #2575fc;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card profile-card">
+                    <div class="card-body text-center">
+                        <!-- Profile Picture -->
+                        <img src="profilephoto.jpg" alt="Profile Picture" class="rounded-circle mb-3" width="150">
+                        <h3 id="name-display" class="editable">Vasanth</h3>
+
+                        <!-- Personal Info -->
+                        <div class="text-start mt-4">
+                            <h5><i class="fas fa-user"></i> Personal Information</h5>
+                            <p><strong>Email:</strong> <span id="email-display" class="editable">vasanth@gmail.com</span></p>
+                            <p><strong>Phone:</strong> <span id="phone-display" class="editable">+91 8956784658</span></p>
+                            <p><strong>Job Title:</strong> <span id="job-display" class="editable">Software Developer</span></p>
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="text-start mt-4">
+                            <h5><i class="fas fa-laptop-code"></i> Skills</h5>
+                            <ul id="skills-list" class="list-unstyled">
+                                <li>
+                                    <span class="editable">JavaScript</span>
+                                    <span class="badge">80%</span>
+                                    <span class="delete-btn"><i class="fas fa-trash"></i></span>
+                                </li>
+                            </ul>
+                            <button id="add-skill-btn" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus"></i> Add Skill</button>
+                        </div>
+
+                        <!-- Resume Upload -->
+                        <div class="text-start mt-4">
+                            <h5><i class="fas fa-file-upload"></i> Resume</h5>
+                            <form id="resume-form" class="mb-3">
+                                <input type="file" id="resume-input" class="form-control" accept=".pdf,.doc,.docx" multiple>
+                                <button type="button" id="upload-resume-btn" class="btn btn-outline-primary btn-sm mt-3"><i class="fas fa-upload"></i> Upload</button>
+                            </form>
+                            <ul id="resume-list" class="list-unstyled"></ul>
+                        </div>
+
+                        <!-- Edit Button -->
+                        <button id="edit-btn" class="btn btn-primary mt-4"><i class="fas fa-edit"></i> Edit Profile</button>
+                        <!-- Back Button -->
+                        <a href="homepage1.html" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const editButton = document.getElementById('edit-btn');
+        const addSkillButton = document.getElementById('add-skill-btn');
+        const resumeInput = document.getElementById('resume-input');
+        const uploadResumeButton = document.getElementById('upload-resume-btn');
+        const resumeList = document.getElementById('resume-list');
+        const editableFields = document.querySelectorAll('.editable');
+        const skillsList = document.getElementById('skills-list');
+
+        let isEditing = false;
+
+        // Toggle edit mode
+        function toggleEditMode() {
+            editableFields.forEach(field => field.contentEditable = isEditing ? "false" : "true");
+            editButton.innerHTML = isEditing ? '<i class="fas fa-edit"></i> Edit Profile' : '<i class="fas fa-save"></i> Save Profile';
+            editButton.classList.toggle('btn-success', !isEditing);
+            editButton.classList.toggle('btn-primary', isEditing);
+            isEditing = !isEditing;
+        }
+
+        // Add skill
+        function addSkill() {
+            if (!isEditing) return;
+
+            const newSkill = prompt("Enter new skill:");
+            const proficiency = prompt("Enter proficiency percentage (e.g., 80):");
+
+            if (newSkill && proficiency) {
+                const skillItem = document.createElement('li');
+                skillItem.innerHTML = `
+                    <span class="editable">${newSkill}</span>
+                    <span class="badge">${proficiency}%</span>
+                    <span class="delete-btn"><i class="fas fa-trash"></i></span>
+                `;
+                skillsList.appendChild(skillItem);
+
+                skillItem.querySelector('.delete-btn').addEventListener('click', () => skillItem.remove());
+            }
+        }
+
+        // Upload resume
+        function uploadResume() {
+            const files = resumeInput.files;
+            for (const file of files) {
+                const listItem = document.createElement('li');
+                listItem.className = 'resume-item';
+                listItem.innerHTML = `
+                    ${file.name}
+                    <span class="delete-btn"><i class="fas fa-trash"></i></span>
+                `;
+                resumeList.appendChild(listItem);
+
+                listItem.querySelector('.delete-btn').addEventListener('click', () => listItem.remove());
+            }
+            resumeInput.value = ''; 
+        }
+
+        editButton.addEventListener('click', toggleEditMode);
+        addSkillButton.addEventListener('click', addSkill);
+        uploadResumeButton.addEventListener('click', uploadResume);
+    </script>
+</body>
+
+</html>
